@@ -1,0 +1,58 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ScrollView"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/log_bg"
+    android:scrollbars="vertical" >
+
+    <HorizontalScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/leaveall_title"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:text="姓名"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:layout_width="250dp"
+                    android:layout_height="30dp"
+                    android:text="请假开始时间"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:layout_width="250dp"
+                    android:layout_height="30dp"
+                    android:text="请假结束时间"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <ListView
+                android:layout_below="@+id/leaveall_title"
+                android:id="@+id/lv_leaveall"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+            </ListView>
+
+            <Button
+                android:layout_below="@+id/lv_leaveall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="quit"
+                android:text="返回" />
+        </RelativeLayout>
+    </HorizontalScrollView>
+
+</ScrollView>

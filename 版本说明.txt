@@ -1,0 +1,4 @@
+android adt         2.3.3 api level 10
+android 开发平台    5.1.1 api level 22
+j2ee       sdk      build 1.7.0_79-b15
+广电服务器 sdk      1.6

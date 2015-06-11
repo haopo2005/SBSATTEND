@@ -1,0 +1,82 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ScrollView"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/log_bg"
+    android:scrollbars="vertical" >
+
+    <HorizontalScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/leave_tips"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="提示：批量审核时，未选中的视为不通过"
+                android:textColor="#ff0000"
+                android:textSize="20sp" />
+
+            <LinearLayout
+                android:id="@+id/leave_title"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/leave_tips"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="60dp"
+                    android:layout_height="30dp"
+                    android:text="审核"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="30dp"
+                    android:text="姓名"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/job"
+                    android:layout_width="120dp"
+                    android:layout_height="30dp"
+                    android:text="开始时间"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/addr"
+                    android:layout_width="120dp"
+                    android:layout_height="30dp"
+                    android:text="结束时间"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:layout_width="300dp"
+                    android:layout_height="30dp"
+                    android:text="请假理由"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <ListView
+                android:id="@+id/lv"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/leave_title" >
+            </ListView>
+
+            <Button
+                android:id="@+id/leavecommit"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lv"
+                android:onClick="commit"
+                android:text="批量审批" />
+        </RelativeLayout>
+    </HorizontalScrollView>
+
+</ScrollView>

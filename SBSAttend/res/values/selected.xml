@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="class_kind">
+        <item>上午</item>
+        <item>下午</item>
+    </string-array>
+</resources>

@@ -1,0 +1,95 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/log_bg"
+    android:gravity="center|center_horizontal|center_vertical"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center|center_horizontal|center_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="请假开始日期：" />
+
+        <EditText
+            android:id="@+id/leavetimepick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="select_date"
+            android:text="请假开始日期" />
+
+        <Spinner
+            android:id="@+id/leave_origin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center|center_horizontal|center_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="请假结束日期：" />
+
+        <EditText
+            android:id="@+id/leavetimepick2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="select_date2"
+            android:text="请假结束日期" />
+
+        <Spinner
+            android:id="@+id/leave_current"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center|center_horizontal|center_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="请假理由：" />
+
+        <EditText
+            android:id="@+id/leave_reason"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="请填写请假理由，50字内" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center|center_horizontal|center_vertical"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/askleave"
+            android:layout_width="200.0dip"
+            android:layout_height="wrap_content"
+            android:onClick="commit"
+            android:text="申请请假" />
+
+        <Button
+            android:id="@+id/leavequit"
+            android:layout_width="200.0dip"
+            android:layout_height="wrap_content"
+            android:onClick="quit"
+            android:text="返回" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,79 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="53.0dip"
+        android:background="#ff394147"
+        android:gravity="center_vertical" >
+
+        <LinearLayout
+            android:layout_width="0.0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.6"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/tv_month"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="xxxx年14月"
+                android:textColor="#ffffffff"
+                android:textSize="21.0dip" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="22.0dip"
+        android:background="#ff8091a8" >
+
+        <TextView
+            style="@style/weekName"
+            android:text="周日" />
+
+        <TextView
+            style="@style/weekName"
+            android:text="周一" />
+
+        <TextView
+            style="@style/weekName"
+            android:text="周二" />
+
+        <TextView
+            style="@style/weekName"
+            android:text="周三" />
+
+        <TextView
+            style="@style/weekName"
+            android:text="周四" />
+
+        <TextView
+            style="@style/weekName"
+            android:text="周五" />
+
+        <TextView
+            style="@style/weekName"
+            android:text="周六" />
+    </LinearLayout>
+
+    <GridView
+        android:id="@+id/gridview"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#00000000"
+        android:clickable="true"
+        android:clipChildren="true"
+        android:columnWidth="60dp"
+        android:horizontalSpacing="2dp"
+        android:listSelector="@null"
+        android:numColumns="7"
+        android:paddingBottom="1dp"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="1dp" />
+
+</LinearLayout>

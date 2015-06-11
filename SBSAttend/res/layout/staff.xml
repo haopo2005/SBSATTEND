@@ -1,0 +1,51 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+     android:gravity="center|center_horizontal|center_vertical"
+    android:background="@drawable/log_bg"
+    android:orientation="vertical" >
+
+    <Button
+        android:id="@+id/dayoff"
+        android:layout_width="200dip"
+        android:layout_height="wrap_content"
+        android:onClick="dayoff"
+        android:text="申请调休" />
+
+    <Button
+        android:id="@+id/dayleave"
+        android:layout_width="200.0dip"
+        android:layout_height="wrap_content"
+        android:onClick="dayleave"
+        android:text="申请请假" />
+    
+     <Button
+        android:layout_width="200.0dip"
+        android:layout_height="wrap_content"
+        android:onClick="watch_leave"
+        android:text="本月请假审批结果" />
+    
+     <Button
+        android:layout_width="200.0dip"
+        android:layout_height="wrap_content"
+        android:onClick="watch_overtime"
+        android:text="本月调休审批结果" />
+      
+      <Button
+        android:layout_width="200.0dip"
+        android:layout_height="wrap_content"
+        android:onClick="watch_shift"
+        android:text="本月值班信息汇总" />
+      <Button
+        android:id="@+id/table_but2"
+        android:layout_width="200.0dip"
+        android:layout_height="wrap_content"
+        android:onClick="watch_rest"
+        android:text="本月部门调休汇总信息" />
+        <Button
+        android:id="@+id/table_but3"
+        android:layout_width="200.0dip"
+        android:layout_height="wrap_content"
+        android:onClick="watch_leaveall"
+        android:text="本月部门请假汇总信息" />
+</LinearLayout>

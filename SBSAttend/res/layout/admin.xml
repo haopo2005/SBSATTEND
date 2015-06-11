@@ -1,0 +1,41 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/log_bg"
+    android:gravity="center|center_horizontal|center_vertical"
+    android:orientation="vertical" >
+
+    <Button
+        android:id="@+id/review_leave"
+        android:layout_width="200dip"
+        android:layout_height="wrap_content"
+        android:onClick="review_leave"
+        android:text="审批请假" />
+
+    <Button
+        android:id="@+id/review_overtime"
+        android:layout_width="200dip"
+        android:layout_height="wrap_content"
+        android:onClick="review_over"
+        android:text="审批调休" />
+
+    <Button
+        android:id="@+id/table_but"
+        android:layout_width="200.0dip"
+        android:layout_height="wrap_content"
+        android:onClick="watch_shift"
+        android:text="本月值班信息汇总" />
+
+    <Button
+        android:layout_width="200.0dip"
+        android:layout_height="wrap_content"
+        android:onClick="watch_rest"
+        android:text="本月部门调休汇总信息" />
+
+    <Button
+        android:layout_width="200.0dip"
+        android:layout_height="wrap_content"
+        android:onClick="watch_leaveall"
+        android:text="本月部门请假汇总信息" />
+
+</LinearLayout>
