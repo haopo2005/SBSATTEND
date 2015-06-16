@@ -53,6 +53,21 @@ public class SpecialCalendar {
 		return dayOfWeek;
 	}
 	
+	//计算上个月最后一天
+	public int getlastday(int year, int month)
+	{
+		boolean isleap = false;
+		int day = 0;
+		
+		if(month == 1)
+		{
+			return getDaysOfMonth(isLeapYear(year - 1), 12);
+		}else
+		{
+			return getDaysOfMonth(isLeapYear(year), month - 1);
+		}
+	}
+	
 	//计算某年某月某日对应是星期几
 	public static String getWeekdayofYear(int year, int month, int day){
 		String week = "";

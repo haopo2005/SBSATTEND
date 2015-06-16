@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.sbs.sbsattend.db.DBConnection;
 import com.sbs.tool.MySignal;
+import com.sbs.tool.SpecialCalendar;
 
 public class Logic {
 	//private static String path = "http://10.0.2.2:8080/web/";
@@ -54,12 +55,33 @@ public class Logic {
 	{
 		String subpath = "QueryWorktHistoryServlet";
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
-		String date = df.format(new Date());
-		String time = date.substring(0,4) + "-" + date.substring(5,7);
+		Date now = new Date();
+		String date = df.format(now);
+		String time = date.substring(0,7);
+		SpecialCalendar sp = new SpecialCalendar();
 
 		String sql = "select * from workhistory where convert(varchar(50),worktime,120) like '"+ time +"%'";
-
-		return DBConnection.getWorkHistory(sql, path+subpath);
+		List<WorkHistory> wh = DBConnection.getWorkHistory(sql, path+subpath);
+		
+		//月末最后一天
+		int day = sp.getlastday(now.getYear(), now.getMonth())+1;
+		int year = now.getYear();
+		
+		if(now.getMonth() == 0)
+		{
+			Date temp = new Date(year-1901, 12-1, day);
+			time = df.format(temp).substring(0, 10);
+			sql = "select * from workhistory where convert(varchar(50),worktime,120) like '"+ time +"%'";
+			wh.add((WorkHistory) DBConnection.getWorkHistory(sql, path+subpath));
+		}else
+		{
+			int month = now.getMonth() -1 ;
+			Date temp = new Date(year-1900, month, day);
+			time = df.format(temp).substring(0, 10);
+			sql = "select * from workhistory where convert(varchar(50),worktime,120) like '"+ time +"%'";
+			wh.add((WorkHistory) DBConnection.getWorkHistory(sql, path+subpath));
+		}
+		return wh;
 	}
 
 	//导出本月调休申请结果
@@ -127,12 +149,32 @@ public class Logic {
 	public static List<String> query_work(String name){
 		String subpath = "QueryWorktTimeServlet";
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
-		String date = df.format(new Date());
-		String time = date.substring(0,4) + "-" + date.substring(5,7);
-
+		Date now = new Date();
+		String date = df.format(now);
+		String time = date.substring(0,7);
+		SpecialCalendar sp = new SpecialCalendar();
+		
 		List<String> result = new ArrayList<String>();
-		List<String> early = query_early(name, time, path + subpath);
+		List<String> early = query_early(name, time, path + subpath);//当月
 		List<String> late = query_late(name, time, path + subpath);
+		List<String> last = null;									//上个月最后一天
+		
+		int day = sp.getlastday(now.getYear(), now.getMonth())+1;
+		int year = now.getYear();
+		
+		if(now.getMonth() == 0)
+		{
+			Date temp = new Date(year-1901, 12-1, day);
+			time = df.format(temp).substring(0, 10);
+			last = query_late(name, time, path + subpath);
+		}else
+		{
+			int month = now.getMonth() -1 ;
+			Date temp = new Date(year-1900, month, day);
+			time = df.format(temp).substring(0, 10);
+			//System.out.println("time:"+time);
+			last = query_late(name, time, path + subpath);
+		}
 
 		for(String l : early)
 		{
@@ -141,6 +183,10 @@ public class Logic {
 		for(String l : late)
 		{
 			result.add(l+" 明天上午");
+		}
+		if(!last.get(0).equals("-1")){
+			
+			result.add(last.get(0).toString() +" 明天上午");
 		}
 		return result;
 	}
@@ -179,6 +225,7 @@ public class Logic {
 	{
 		String sql = "select convert(varchar(50),worktime,120) as worktime from workhistory where convert(varchar(50),worktime,120) like '"+ time +"%'" + "and worker1='"
 				+ name + "'";
+		System.out.println(sql);
 		return DBConnection.getWorkInfo(sql, path);
 	}
 
