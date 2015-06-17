@@ -59,28 +59,16 @@ public class Logic {
 		String date = df.format(now);
 		String time = date.substring(0,7);
 		SpecialCalendar sp = new SpecialCalendar();
-
+		
+		//本月
 		String sql = "select * from workhistory where convert(varchar(50),worktime,120) like '"+ time +"%'";
 		List<WorkHistory> wh = DBConnection.getWorkHistory(sql, path+subpath);
 		
-		//月末最后一天
-		int day = sp.getlastday(now.getYear(), now.getMonth())+1;
-		int year = now.getYear();
+		//上月末最后一天
+		time = sp.getlastdaystr();
+		sql = "select * from workhistory where convert(varchar(50),worktime,120) like '"+ time +"%'";
+		wh.add(0,(WorkHistory) DBConnection.getWorkHistory(sql, path+subpath).get(0));
 		
-		if(now.getMonth() == 0)
-		{
-			Date temp = new Date(year-1901, 12-1, day);
-			time = df.format(temp).substring(0, 10);
-			sql = "select * from workhistory where convert(varchar(50),worktime,120) like '"+ time +"%'";
-			wh.add((WorkHistory) DBConnection.getWorkHistory(sql, path+subpath));
-		}else
-		{
-			int month = now.getMonth() -1 ;
-			Date temp = new Date(year-1900, month, day);
-			time = df.format(temp).substring(0, 10);
-			sql = "select * from workhistory where convert(varchar(50),worktime,120) like '"+ time +"%'";
-			wh.add((WorkHistory) DBConnection.getWorkHistory(sql, path+subpath));
-		}
 		return wh;
 	}
 
@@ -91,8 +79,12 @@ public class Logic {
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
 		String date = df.format(new Date());
 		String time = date.substring(0,4) + "-" + date.substring(5,7);
-		String sql = "select * from dbo.overtime where convert(varchar(50),originwork,120) like '"+ time + "%' and name='"+ name +"'";
-
+		//String sql = "select * from dbo.overtime where convert(varchar(50),originwork,120) like '"+ time + "%' and name='"+ name +"'";
+		
+		SpecialCalendar sp = new SpecialCalendar();
+		String time2 = sp.getlastdaystr();
+		String sql = "select * from dbo.overtime where convert(varchar(50),originwork,120) like '"+ time + "%' or convert(varchar(50),originwork,120) like '"+time2+"%' and name='"+ name +"'";
+		System.out.println(sql);
 		//POST发送查询指令
 		return DBConnection.getWork(sql, path + subpath);
 	}
@@ -159,22 +151,11 @@ public class Logic {
 		List<String> late = query_late(name, time, path + subpath);
 		List<String> last = null;									//上个月最后一天
 		
-		int day = sp.getlastday(now.getYear(), now.getMonth())+1;
-		int year = now.getYear();
 		
-		if(now.getMonth() == 0)
-		{
-			Date temp = new Date(year-1901, 12-1, day);
-			time = df.format(temp).substring(0, 10);
-			last = query_late(name, time, path + subpath);
-		}else
-		{
-			int month = now.getMonth() -1 ;
-			Date temp = new Date(year-1900, month, day);
-			time = df.format(temp).substring(0, 10);
-			//System.out.println("time:"+time);
-			last = query_late(name, time, path + subpath);
-		}
+		//上月末最后一天
+		time = sp.getlastdaystr();		
+		last = query_late(name, time, path + subpath);
+		
 
 		for(String l : early)
 		{

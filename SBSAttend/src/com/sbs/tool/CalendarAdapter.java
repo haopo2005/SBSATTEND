@@ -141,12 +141,13 @@ public class CalendarAdapter extends BaseAdapter {
 					}
 					// 本来调休
 					for (Work w : wk) {
-						if (Integer.parseInt(w.getOriginrest().substring(8, 10)) == (position - dayOfWeek + 1)) {
+						int mdate = Integer.parseInt(w.getOriginrest().substring(8, 10));
+						if (mdate == (position - dayOfWeek + 1)) {
 							if (w.getOriginshift().equals("当天下午")) {
 								ifday = 1; // 当前下午不能再休息
 							}
 						}
-						if (Integer.parseInt(w.getOriginrest().substring(8, 10)) == (position - dayOfWeek)) {
+						if (mdate == (position - dayOfWeek) || (0 == (position - dayOfWeek) && mdate >=28)) {	//后面的条件针对本月第一天
 							if (w.getOriginshift().equals("明天上午")) {
 								ifnight = 2; // 明天上午不能再休息
 							}
@@ -155,12 +156,17 @@ public class CalendarAdapter extends BaseAdapter {
 				}
 
 				if (ifday != 1) {
-					nightshift += wh.get(position - dayOfWeek).getDaywork()
+					nightshift += wh.get(position - dayOfWeek + 1).getDaywork()				//上月末最后一天插入了wh队列，故这边加1防止班次往后偏移
 							+ ";";
 				}
 				if (ifnight != 2) {
 					if (position - dayOfWeek - 1 >= 0) {
-						dayshift += wh.get(position - dayOfWeek - 1)
+						dayshift += wh.get(position - dayOfWeek)                            //上月末最后一天插入了wh队列，故这边没有减1防止班次往后偏移
+								.getNightwork() + ";";
+					}
+					if(position - dayOfWeek == 0)	//月初第一天上午
+					{
+						dayshift += wh.get(position - dayOfWeek)
 								.getNightwork() + ";";
 					}
 				}

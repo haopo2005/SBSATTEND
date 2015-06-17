@@ -1,6 +1,8 @@
 package com.sbs.tool;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class SpecialCalendar {
 	private int daysOfMonth = 0; // 某月的天数
@@ -66,6 +68,29 @@ public class SpecialCalendar {
 		{
 			return getDaysOfMonth(isLeapYear(year), month - 1);
 		}
+	}
+	
+	//返回某月最后一天字符串
+	public  String getlastdaystr()
+	{
+		String time = "";
+		Date now = new Date();
+		Date temp;
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+		//上月末最后一天
+		int day = getlastday(now.getYear()+1900, now.getMonth()+1);
+		int year = now.getYear();
+		if(now.getMonth() == 0)
+		{
+			temp = new Date(year-1, 12-1, day);
+			
+		}else
+		{
+			int month = now.getMonth() -1 ;
+			temp = new Date(year, month, day);
+		}
+		time = df.format(temp).substring(0, 10);
+		return time;
 	}
 	
 	//计算某年某月某日对应是星期几
